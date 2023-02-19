@@ -1,30 +1,32 @@
-var currentSample = "bass";
+var currentSample = "kick";
 var playing = false; //determines the state of the sequencer
 const selectSample =  (sample) =>{
     console.log("Selecting sample: "+sample.currentTarget.sample);
     currentSample = sample.currentTarget.sample;
 }
 const clickSequencer = (position) =>{
-  //  console.log("Sequencer position: "+position.currentTarget.position);
     if(!position.currentTarget.loaded)
     {
         position.currentTarget.style.backgroundColor = "yellowgreen";
         console.log("arming position "+position.currentTarget.position+" with sample "+currentSample)
         position.currentTarget.loaded = true;
+        
+        sequencer.addToSequence(position.currentTarget.position,currentSample);
     }
     else
     {
         position.currentTarget.style.backgroundColor = "darkgray";
         position.currentTarget.loaded = false;
+        sequencer.removeFromSequence(position.currentTarget.position);
     } 
 } 
 const samples = []; //array to hold samples
 const sequencerSize = 16; //how many beats the sequencer has
-var bassKick = "bass"; //text strings for now
-var hiHat = "hihat";
+var kick = "kick"; //text strings for now
+var hiHat = "chihat";
 var snare = "snare";
-var openHiHat = "openhihat";
-samples.push(bassKick);
+var openHiHat = "ohihat";
+samples.push(kick);
 samples.push(hiHat);
 samples.push(snare);
 samples.push(openHiHat);
@@ -50,3 +52,5 @@ const playButton = document.querySelector("#play-button");
 const stopButton = document.querySelector("#stop-button");
 playButton.addEventListener("click",sequencer.startSequencer);
 stopButton.addEventListener("click",sequencer.stopSequencer);
+//const playSnare = document.getElementById('snare');
+sequencer.loadSamples();
