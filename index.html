@@ -6,29 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Sequencer and Drum Machine</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
     <div id = "header-div">
-        Sequencer
+        <div class="title-div">
+            Sequencer
+        </div>
+        <div class="control-div">
+            <button id="play-button">P</button>
+            <button id="stop-button">S</button>
+
+        </div>
     </div>
-    <div id = "bpm-div">
-        Samples
-        <div>bass kick</div>
-        <div>close hi hat</div>
-        <div>snare </div>
-        <div>open hi hat</div>
-    </div>
-    <div id = "sequencer-div">
-       
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+    <div class="main-div">
+        <div id = "sample-div">
+            Samples
+        </div>
+        <div class = "sequencer-div-container">
+            <div id = "sequencer-div">
+            
+        
+            </div>
+            <div id = "sequencer-div-two">
+            
+        
+            </div>
+        </div>
     </div>
 </body>
 </html>
