@@ -22,7 +22,7 @@
     </div>
     <div class="main-div">
         <div id = "sample-div">
-            Samples
+            Select Sample
         </div>
         <div class = "sequencer-div-container">
             <div id = "sequencer-div">
@@ -30,10 +30,35 @@
             <div id = "sequencer-div-two">
             </div>
         </div>
+        <div class = "sample-controls">
+            <div id="velocity">
+                Velocity
+                <div id = "velocity-div">
+                    <button id="weak">weak</button>
+                    <button id ="medium">medium</button>
+                    <button id ="strong">strong</button>
+    
+                </div>
+            </div>
+            <div id="attack">
+                Attack
+            </div>
+            <div id="decay">
+                Decay
+            </div>
+        </div>
+        
     </div>
-    <div class = "sample-controls">
-
-    </div>
+    <div class = "project-div">
+        <button id ="clear-button">
+            Clear Project
+        </button>
+        <button id="load-button">
+            Load Project
+        </button>
+        
+    </div>  
+    
     <audio src = "/sounds/kick.wav" id = "kick" class="sample" position = "0"></audio>
     <audio src = "/sounds/snare.wav" id = "snare" class="sample" position = "1"></audio>
     <audio src = "/sounds/chihat.wav" id = "chihat" class="sample" position = "2"></audio>

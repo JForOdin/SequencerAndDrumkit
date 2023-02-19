@@ -1,13 +1,29 @@
 var currentSample = "kick";
 var playing = false; //determines the state of the sequencer
+var currentVelocity = 3;
 const selectSample =  (sample) =>{
     console.log("Selecting sample: "+sample.currentTarget.sample);
     currentSample = sample.currentTarget.sample;
 }
+const setCurrentVelocity = (velocity) => {
+    console.log("Velocity: "+velocity.currentTarget.velocity);
+    currentVelocity = velocity.currentTarget.velocity;
+}
 const clickSequencer = (position) =>{
     if(!position.currentTarget.loaded)
     {
-        position.currentTarget.style.backgroundColor = "yellowgreen";
+        if(currentVelocity==3)
+        {
+            position.currentTarget.style.backgroundColor = "salmon";
+        }
+        if(currentVelocity==2)
+        {
+            position.currentTarget.style.backgroundColor = "darkkhaki";
+        }
+        if(currentVelocity==1)
+        {
+            position.currentTarget.style.backgroundColor = "yellowgreen";
+        }
         console.log("arming position "+position.currentTarget.position+" with sample "+currentSample)
         position.currentTarget.loaded = true;
         
@@ -37,6 +53,7 @@ for(let i = 0; i < samples.length; i++)
     let individualSampleDiv = document.createElement("div");
     individualSampleDiv.textContent = "."+samples[i];
     individualSampleDiv.sample = samples[i];
+  //  individualSampleDiv.style.borderRadius = "10px";
     individualSampleDiv.className = "sample";
     individualSampleDiv.addEventListener("click",selectSample,false);
     sampleDiv.appendChild(individualSampleDiv);
@@ -50,7 +67,20 @@ for(let i = 0; i < samples.length; i++)
 sequencer.printSamples();
 const playButton = document.querySelector("#play-button");
 const stopButton = document.querySelector("#stop-button");
+const clearButton = document.querySelector("#clear-button");
 playButton.addEventListener("click",sequencer.startSequencer);
 stopButton.addEventListener("click",sequencer.stopSequencer);
+clearButton.addEventListener("click",sequencer.clear);
+//Setup velocity buttons . Three values represent volume of samples
+const velocityWeak = document.querySelector("#weak");
+const velocityMedium = document.querySelector("#medium");
+const VelocityStrong = document.querySelector("#strong");
+velocityWeak.addEventListener("click",setCurrentVelocity,false);
+velocityWeak.velocity = 1;
+velocityMedium.addEventListener("click",setCurrentVelocity,false);
+velocityMedium.velocity = 2;
+VelocityStrong.addEventListener("click",setCurrentVelocity,false);
+VelocityStrong.velocity = 3;
+
 //const playSnare = document.getElementById('snare');
 sequencer.loadSamples();

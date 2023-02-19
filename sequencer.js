@@ -106,6 +106,7 @@ class Sequencer {
         console.log("playing sample : "+this.audioSamples[samplePosition]);
         this.audioSamples[1].currentTime = 0;
         this.audioSamples[1].play();
+       // this.audioSamples[1].loop = true;
     }
 
     printSamples()
@@ -113,6 +114,15 @@ class Sequencer {
         for(let i = 0; i < this.samples.length; i++)
         {
             console.log("This.samples : "   +this.samples[i]);
+        }
+    }
+    clear()
+    {
+        for(let i = 0; i < this.sequence.length; i++)
+        {
+            if(this.sequence[i])
+            delete this.sequence[i];
+
         }
     }
 }
