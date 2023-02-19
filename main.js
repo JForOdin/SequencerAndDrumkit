@@ -1,0 +1,10 @@
+const samples = [];
+var bassKick = "bass";
+var hiHat = "hihat";
+var snare = "snare";
+var openHiHat = "openhihat";
+samples.push(bassKick);
+samples.push(hiHat);
+samples.push(snare);
+samples.push(openHiHat);
+console.log(samples);
