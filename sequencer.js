@@ -1,8 +1,4 @@
 
-function playOne(sample)
-{
-    sample.play();
-}
 class Sequencer {
     
     constructor(sequencerSize )
@@ -55,18 +51,10 @@ class Sequencer {
             console.log("Start sequencer");
             for(let i = 0; i < this.sequence.length; i++)
             {
-                
-               // setTimeout(this.flashPosition(),2000);
-
                 if(this.sequence[i])
                 {
-                  
-                   console.log("Play sample");
-                   console.log("this sequence "+this.sequence[i].sample);
-                 //  setTimeout(this.playSample),2000);
-                  var currentS = this.audioSamples[0];
-                 
-                   setTimeout(playOne,2000,this.audioSamples[0]);
+
+                    setTimeout(this.playSample,2000,this.audioSamples[this.sequence[i].sample.id]);
                 }
 
             }
@@ -79,9 +67,9 @@ class Sequencer {
             console.log("Stop sequencer");
         }
     }
-    addSample(sample)
+    addSample(sample,samplePosition)
     {
-        this.samples.push(sample);
+        this.samples.push({sample,samplePosition});
     }
     addToSequence(position,sample)
     {
@@ -99,22 +87,34 @@ class Sequencer {
     }
     loadSamples()
     {
+        console.log("Load samples: ");
         for(let i = 0; i < this.samples.length; i++)
+        {
+            
+            const sample = document.querySelectorAll(`${this.samples[i].sample.sampleName}`);
+            let sampleName = this.samples[i].sample.sampleName;
+            console.log("Sample name"+this.samples[i].sample.sampleName);
+            this.audioSamples[i] = new Audio();
+            this.audioSamples[i].src = `sounds/${sampleName}`+".wav";
+            this.audioSamples[i].position = i;
+        }
+     /*   for(let i = 0; i < this.samples.length; i++)
         {
             const sample = document.querySelectorAll(`${this.samples[i]}`);
             this.audioSamples[i] = new Audio();
             this.audioSamples[i].src = `sounds/${this.samples[i]}`+".wav";
             this.audioSamples[i].position = i;
            // console.log("Logging this.audioSamples[i]"+this.audioSamples[i].src);
-        }
+        } */
         
     }
-    playSample()
+    playSample(sample)
     {
      //   console.log("playing sample : "+this.audioSamples[samplePosition]);
        console.log("playing sample"); 
       //  this.audioSamples[1].currentTime = 0;
-        this.audioSamples[1].play();
+        //this.audioSamples[0].play();
+        sample.play();
       //this.audioSample.play();
     }
     printSamples()

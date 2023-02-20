@@ -38,11 +38,15 @@ const clickSequencer = (position) =>{
 } 
 const samples = []; //array to hold samples
 const sequencerSize = 16; //how many beats the sequencer has
-var kick = "kick"; //text strings for now
-//var kick = { id:"0",sampleName:"kick"};
-var hiHat = "chihat";
+//var kick = "kick"; //text strings for now
+var kick = { id:"0",sampleName:"kick"};
+var hiHat = {id:"1",sampleName:"chihat"};
+var snare = {id:"2",sampleName:"snare"};
+var openHiHat = {id:"3",sampleName:"ohihat"};
+
+/*var hiHat = "chihat";
 var snare = "snare";
-var openHiHat = "ohihat";
+var openHiHat = "ohihat"; */
 samples.push(kick);
 samples.push(hiHat);
 samples.push(snare);
@@ -52,7 +56,7 @@ for(let i = 0; i < samples.length; i++)
 {   // for all the samples in our array, 
     //load them into a div on the left side of index.html
     let individualSampleDiv = document.createElement("div");
-    individualSampleDiv.textContent = "."+samples[i];
+    individualSampleDiv.textContent = "."+samples[i].sampleName;
     individualSampleDiv.sample = samples[i];
     individualSampleDiv.style.border = "5px solid darkgreen";
     individualSampleDiv.className = "sample";
@@ -63,7 +67,7 @@ for(let i = 0; i < samples.length; i++)
 const sequencer = new Sequencer(16);
 for(let i = 0; i < samples.length; i++)
 {
-    sequencer.addSample(samples[i]);
+    sequencer.addSample(samples[i],i);
 }
 var currentSample = samples[0];
 sequencer.printSamples();
