@@ -9,6 +9,8 @@
     border-top-right-radius: 10px;
     padding: 5px;
     display: flex;
+    background-color: floralwhite;
+
 }
 .title-div {
     flex: 1 1 0;
@@ -19,7 +21,7 @@
 }
 .control-div{
     flex: 1 1 0; 
-    color:darkgreen;
+    
 }
 button {
     background-color:yellowgreen;
@@ -31,6 +33,7 @@ button {
     gap: 10px;
     margin: 20px;
     justify-content: space-around;
+
 }
 
 #sample-div {
@@ -38,7 +41,8 @@ button {
     flex-direction: column;
     padding: 10px;
     margin: 8px;
-    color:darkgreen;
+    color:yellowgreen;
+    text-align: center;
     border: 2px solid black;
     border-radius: 10px;
     width: fit-content;
@@ -51,6 +55,7 @@ button {
     padding: 4px;
     border-radius: 10px;
 
+
 }
 #sequencer-div {
    display: flex;
@@ -60,12 +65,14 @@ button {
    align-items: center;
 
 }
+
 #sequencer-div-two {
     display: flex;
     flex: 1;
     justify-content:space-between;
     gap: 4px;
     align-items: center;
+
  }
  .sample-controls {
     display:flex;
@@ -96,5 +103,7 @@ button {
     margin: 0px auto;
     padding: 10px;
     border: 2px solid black;
+    background-color: floralwhite;
+
 }
 

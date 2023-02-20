@@ -1,4 +1,8 @@
 
+function playOne(sample)
+{
+    sample.play();
+}
 class Sequencer {
     
     constructor(sequencerSize )
@@ -35,7 +39,15 @@ class Sequencer {
             sequencerDivTwo.appendChild(individualSequencerDiv);
         }
     }
-    
+    flashPosition = (position) => {
+       // console.log(position.currentTarget.position);
+    }
+    getSampleIndex = (sampleName) => {
+        for(let i = 0; i < this.audioSamples.length; i++)
+        {
+           // if(sampleName==this.audioSamples[i])
+        }
+    }
     startSequencer = () => {
        // if(!this.playing)
         {
@@ -43,23 +55,21 @@ class Sequencer {
             console.log("Start sequencer");
             for(let i = 0; i < this.sequence.length; i++)
             {
-               // setTimeout(this.playSample(),1000);
                 
+               // setTimeout(this.flashPosition(),2000);
+
                 if(this.sequence[i])
                 {
-                   // console.log("Position of sample"+this.sequence[i].sample.position);
-                    //   this.playSample(this.sequence[i].position);
-                  //  this.playSample(this.sequence[i].position);
+                  
                    console.log("Play sample");
-                   setTimeout(this.playSample(),1000);
-                   //this.playSample();
+                   console.log("this sequence "+this.sequence[i].sample);
+                 //  setTimeout(this.playSample),2000);
+                  var currentS = this.audioSamples[0];
+                 
+                   setTimeout(playOne,2000,this.audioSamples[0]);
                 }
 
             }
-         /*   for(let i = 0; i < this.audioSamples.length; i++)
-            {
-                this.audioSamples[i].play();
-            } */
         }
     }
     stopSequencer = () => {
@@ -85,7 +95,6 @@ class Sequencer {
     }
     removeFromSequence(position)
     {
-        console.log("remove element from sequence");
         delete this.sequence[position];
     }
     loadSamples()
@@ -100,15 +109,14 @@ class Sequencer {
         }
         
     }
-   
-    playSample(samplePosition)
+    playSample()
     {
-        console.log("playing sample : "+this.audioSamples[samplePosition]);
-        this.audioSamples[1].currentTime = 0;
+     //   console.log("playing sample : "+this.audioSamples[samplePosition]);
+       console.log("playing sample"); 
+      //  this.audioSamples[1].currentTime = 0;
         this.audioSamples[1].play();
-       // this.audioSamples[1].loop = true;
+      //this.audioSample.play();
     }
-
     printSamples()
     {
         for(let i = 0; i < this.samples.length; i++)

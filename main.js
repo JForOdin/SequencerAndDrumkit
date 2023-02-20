@@ -1,4 +1,4 @@
-var currentSample = "kick";
+//var currentSample = "kick";
 var playing = false; //determines the state of the sequencer
 var currentVelocity = 3;
 const selectSample =  (sample) =>{
@@ -16,11 +16,11 @@ const clickSequencer = (position) =>{
         {
             position.currentTarget.style.backgroundColor = "salmon";
         }
-        if(currentVelocity==2)
+        else if(currentVelocity==2)
         {
             position.currentTarget.style.backgroundColor = "darkkhaki";
         }
-        if(currentVelocity==1)
+        else
         {
             position.currentTarget.style.backgroundColor = "yellowgreen";
         }
@@ -39,6 +39,7 @@ const clickSequencer = (position) =>{
 const samples = []; //array to hold samples
 const sequencerSize = 16; //how many beats the sequencer has
 var kick = "kick"; //text strings for now
+//var kick = { id:"0",sampleName:"kick"};
 var hiHat = "chihat";
 var snare = "snare";
 var openHiHat = "ohihat";
@@ -53,7 +54,7 @@ for(let i = 0; i < samples.length; i++)
     let individualSampleDiv = document.createElement("div");
     individualSampleDiv.textContent = "."+samples[i];
     individualSampleDiv.sample = samples[i];
-  //  individualSampleDiv.style.borderRadius = "10px";
+    individualSampleDiv.style.border = "5px solid darkgreen";
     individualSampleDiv.className = "sample";
     individualSampleDiv.addEventListener("click",selectSample,false);
     sampleDiv.appendChild(individualSampleDiv);
@@ -64,6 +65,7 @@ for(let i = 0; i < samples.length; i++)
 {
     sequencer.addSample(samples[i]);
 }
+var currentSample = samples[0];
 sequencer.printSamples();
 const playButton = document.querySelector("#play-button");
 const stopButton = document.querySelector("#stop-button");
@@ -82,5 +84,4 @@ velocityMedium.velocity = 2;
 VelocityStrong.addEventListener("click",setCurrentVelocity,false);
 VelocityStrong.velocity = 3;
 
-//const playSnare = document.getElementById('snare');
 sequencer.loadSamples();
