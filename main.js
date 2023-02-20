@@ -38,15 +38,10 @@ const clickSequencer = (position) =>{
 } 
 const samples = []; //array to hold samples
 const sequencerSize = 16; //how many beats the sequencer has
-//var kick = "kick"; //text strings for now
 var kick = { id:"0",sampleName:"kick"};
 var hiHat = {id:"1",sampleName:"chihat"};
 var snare = {id:"2",sampleName:"snare"};
 var openHiHat = {id:"3",sampleName:"ohihat"};
-
-/*var hiHat = "chihat";
-var snare = "snare";
-var openHiHat = "ohihat"; */
 samples.push(kick);
 samples.push(hiHat);
 samples.push(snare);
