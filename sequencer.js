@@ -7,7 +7,6 @@ class Sequencer {
         this.audioSamples = []; //references to our audio samples
         this.playing = false; //state of the sequencer
         this.sequence = new Array(16);
-        this.scheduleSequence = [];
         const sequencerDiv = document.querySelector("#sequencer-div");
         this.timeTillNext = 500;
         this.totalLoopTime = sequencerSize*500;
@@ -100,25 +99,19 @@ class Sequencer {
             
             const sample = document.querySelectorAll(`${this.samples[i].sample.sampleName}`);
             let sampleName = this.samples[i].sample.sampleName;
-            console.log("Sample name"+this.samples[i].sample.sampleName);
+            console.log("Sample name: "+this.samples[i].sample.sampleName);
             this.audioSamples[i] = new Audio();
             this.audioSamples[i].src = `sounds/${sampleName}`+".wav";
             this.audioSamples[i].position = i;
         }
     }
-     playSample(sample,position)
+    playSample(sample,position)
     {
-       console.log("playing sample from position "+position); 
+        console.log("playing sample from position "+position); 
         sample.currentTime = 0;
         sample.play();
     }
-    printSamples()
-    {
-        for(let i = 0; i < this.samples.length; i++)
-        {
-            console.log("This.samples : "   +this.samples[i]);
-        }
-    }
+    
     clear()
     {
         for(let i = 0; i < this.sequence.length; i++)

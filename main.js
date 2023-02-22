@@ -65,7 +65,6 @@ for(let i = 0; i < samples.length; i++)
     sequencer.addSample(samples[i],i);
 }
 var currentSample = samples[0];
-sequencer.printSamples();
 const playButton = document.querySelector("#play-button");
 const stopButton = document.querySelector("#stop-button");
 const clearButton = document.querySelector("#clear-button");
