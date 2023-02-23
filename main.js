@@ -14,19 +14,18 @@ const clickSequencer = (position) =>{
     {
         if(currentVelocity==3)
         {
-            position.currentTarget.style.backgroundColor = "salmon";
+            position.currentTarget.style.backgroundColor = "deepSkyBlue";
         }
         else if(currentVelocity==2)
         {
-            position.currentTarget.style.backgroundColor = "darkkhaki";
+            position.currentTarget.style.backgroundColor = "lightskyblue";
         }
         else
         {
-            position.currentTarget.style.backgroundColor = "yellowgreen";
+            position.currentTarget.style.backgroundColor = "darkcyan";
         }
         console.log("arming position "+position.currentTarget.position+" with sample "+currentSample)
         position.currentTarget.loaded = true;
-        
         sequencer.addToSequence(position.currentTarget.position,currentSample);
     }
     else
@@ -37,7 +36,6 @@ const clickSequencer = (position) =>{
     } 
 } 
 const samples = []; //array to hold samples
-const sequencerSize = 16; //how many beats the sequencer has
 var kick = { id:"0",sampleName:"kick"};
 var hiHat = {id:"1",sampleName:"chihat"};
 var snare = {id:"2",sampleName:"snare"};
@@ -53,18 +51,18 @@ for(let i = 0; i < samples.length; i++)
     let individualSampleDiv = document.createElement("div");
     individualSampleDiv.textContent = "."+samples[i].sampleName;
     individualSampleDiv.sample = samples[i];
-    individualSampleDiv.style.border = "5px solid darkgreen";
+    individualSampleDiv.style.border = "5px solid skyBlue";
     individualSampleDiv.className = "sample";
     individualSampleDiv.addEventListener("click",selectSample,false);
     sampleDiv.appendChild(individualSampleDiv);
 }
-
-const sequencer = new Sequencer(16);
+const sequencerSize = 8; //how many beats the sequencer has
+const sequencer = new Sequencer(sequencerSize);
 for(let i = 0; i < samples.length; i++)
 {
     sequencer.addSample(samples[i],i);
 }
-var currentSample = samples[0];
+var currentSample = samples[0]; //set to kick drum
 const playButton = document.querySelector("#play-button");
 const stopButton = document.querySelector("#stop-button");
 const clearButton = document.querySelector("#clear-button");

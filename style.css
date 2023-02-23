@@ -2,7 +2,7 @@
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
-    color:darkgray;
+    color:darkcyan;
     border-top: 2px solid darkgray;
     border-bottom: 2px solid darkgray;
     border-top-left-radius: 10px;
@@ -24,16 +24,16 @@
     
 }
 button {
-    background-color:yellowgreen;
+    background-color:darkcyan;
     color: white;
     margin: 2px;
 }
 .main-div {
     display: flex;
     gap: 10px;
-    margin: 20px;
+    /* margin: 20px; */
     justify-content: space-around;
-
+    background-color: lightgray;
 }
 
 #sample-div {
@@ -41,9 +41,9 @@ button {
     flex-direction: column;
     padding: 10px;
     margin: 8px;
-    color:yellowgreen;
+    color:white;
     text-align: center;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 10px;
     width: fit-content;
 }
@@ -51,13 +51,13 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid white;
     padding: 4px;
     border-radius: 10px;
-
+    gap: 4px;
 
 }
-#sequencer-div {
+#kick-div {
    display: flex;
    flex: 1;
    justify-content:center;
@@ -66,7 +66,23 @@ button {
 
 }
 
-#sequencer-div-two {
+#snare-div {
+    display: flex;
+    flex: 1;
+    justify-content:space-between;
+    gap: 4px;
+    align-items: center;
+
+ }
+ #chihat-div {
+    display: flex;
+    flex: 1;
+    justify-content:space-between;
+    gap: 4px;
+    align-items: center;
+
+ }
+ #ohihat-div {
     display: flex;
     flex: 1;
     justify-content:space-between;
@@ -81,8 +97,8 @@ button {
     margin: 10px;
     gap: 20px;
     padding: 6px;
-    color:darkgreen;
-    border: 2px solid black;
+    color:darkcyan;
+    border: 2px solid white;
     border-radius: 10px;
  }
  #velocity-div{
@@ -91,19 +107,19 @@ button {
      margin-top: 10px;
  }
  #medium {
-     background-color: darkkhaki;
+     background-color:lightskyblue;
  }
  #strong {
-    background-color:salmon;
+    background-color:deepskyblue;
 }
 .project-div{
     display:flex;
     justify-content: center;
-    max-width: fit-content;
+   /* // max-width: fit-content; */
     margin: 0px auto;
-    padding: 10px;
-    border: 2px solid black;
+    /* //padding: 10px; */
+    border-bottom: 2px solid darkgray;
     background-color: floralwhite;
-
+    border-radius: 10px;
 }
 

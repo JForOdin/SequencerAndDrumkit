@@ -1,45 +1,53 @@
-
+function createDiv(parentDiv,position) { //returns a div to be used for sequencer
+    let div;
+    div = document.createElement("div");
+    div.style.backgroundColor = "darkgray";
+    div.style.width = "40px";
+    div.style.height = "40px";
+    div.className ="box";
+    div.position = position;
+    div.addEventListener("click",clickSequencer,false);
+    return div;
+}
 class Sequencer {
-    
-    constructor(sequencerSize )
+    constructor(sequencerSize)
     {
         this.samples = [];
-        this.audioSamples = []; //references to our audio samples
+        this.audioSamples = [];
         this.playing = false; //state of the sequencer
-        this.sequence = new Array(16);
-        const sequencerDiv = document.querySelector("#sequencer-div");
+        this.sequence = new Array(sequencerSize);
         this.timeTillNext = 500;
-        this.totalLoopTime = sequencerSize*500;
-        console.log("Total loop time at 120 bpm: "+this.totalLoopTime);
-        //setup two sections of divs for sequencer.. two rows stacked vertically
-        
-        for(let i = 0; i < sequencerSize/2;i++)
+        const kickDiv = document.querySelector("#kick-div");
+        const snareDiv = document.querySelector("#snare-div");
+        const oHiHatDiv = document.querySelector("#ohihat-div");
+        const cHiHatDiv = document.querySelector("#chihat-div");
+        let individualKickDiv;
+        let individualSnareDiv;
+        let individualOHatDiv;
+        let individualCHatDiv;
+        for(let i = 0; i < sequencerSize; i++)
         {
-            let individualSequencerDiv =document.createElement("div");
-            individualSequencerDiv.style.backgroundColor = "darkgray";
-            individualSequencerDiv.style.width = "40px";
-            individualSequencerDiv.style.height = "40px";
-            individualSequencerDiv.className ="box";
-            individualSequencerDiv.position = i;
-            individualSequencerDiv.addEventListener("click",clickSequencer,false);
-            sequencerDiv.appendChild(individualSequencerDiv);
-
-        }
-        const sequencerDivTwo = document.querySelector("#sequencer-div-two");
-        for(let i = sequencerSize/2; i < sequencerSize; i++)
-        {
-            let individualSequencerDiv = document.createElement("div");
-            individualSequencerDiv.style.backgroundColor = "darkgray";
-            individualSequencerDiv.style.width = "40px";
-            individualSequencerDiv.style.height = "40px";
-            individualSequencerDiv.className ="box";
-            individualSequencerDiv.position = i;
-            individualSequencerDiv.addEventListener("click",clickSequencer,false);
-            sequencerDivTwo.appendChild(individualSequencerDiv);
+            individualKickDiv = createDiv(kickDiv,i);
+            kickDiv.appendChild(individualKickDiv);
+            individualSnareDiv = createDiv(snareDiv,i);
+            snareDiv.appendChild(individualSnareDiv);
+            individualOHatDiv = createDiv(oHiHatDiv,i)
+            oHiHatDiv.appendChild(individualOHatDiv);
+            individualCHatDiv = createDiv(cHiHatDiv,i);
+            cHiHatDiv.appendChild(individualCHatDiv);
         }
     }
-    
-   loop = (index, limit, count) => 
+    addToSequence(position,sample)
+    {
+        this.sequence[position] = {position,sample};
+        console.log(sample);
+    }
+    addSample(sample,samplePosition)
+    {
+        this.samples.push({sample,samplePosition});
+        
+    }
+    loop = (index, limit, count) => 
     {
         console.log("index"+index);
         if(!this.playing)
@@ -48,6 +56,10 @@ class Sequencer {
         {
             if(this.sequence[index])
             {
+                //need to change the bg color of the active div
+               // let activeDiv = document.querySelector("individualKickDiv")
+               // div.style.backgroundColor = "green";
+                
                 let id = this.sequence[index].sample.id;
                 let sample = this.audioSamples[id];
                 console.log("playing sample: "+this.sequence[index].sample.sampleName);
@@ -67,7 +79,7 @@ class Sequencer {
     }
     startSequencer = () => {
         this.playing = true;
-        this.loop(0, 500, 16);
+        this.loop(0, 500, 8);
       
     }
     
@@ -77,15 +89,6 @@ class Sequencer {
             this.playing = false;
             console.log("Stop sequencer");
         }
-    }
-    addSample(sample,samplePosition)
-    {
-        this.samples.push({sample,samplePosition});
-    }
-    addToSequence(position,sample)
-    {
-        this.sequence[position] = {position,sample};
-
     }
     removeFromSequence(position)
     {
@@ -110,14 +113,5 @@ class Sequencer {
         console.log("playing sample from position "+position); 
         sample.currentTime = 0;
         sample.play();
-    }
-    
-    clear()
-    {
-        for(let i = 0; i < this.sequence.length; i++)
-        {
-            if(this.sequence[i])
-            delete this.sequence[i];
-        }
     }
 }
