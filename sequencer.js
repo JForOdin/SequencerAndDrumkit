@@ -15,6 +15,7 @@ class Sequencer
         this.rowDivs.push(cHatDiv);
         this.rowDivs.push(oHatDiv);
         this.sequencerLength = sequencerLength;
+        this.bpm = 120;
         this.beatTime = 500; //duration of each beat 500 ms
         ///////// Our intial play state should be false
         this.playing = false;
@@ -70,7 +71,7 @@ class Sequencer
             return;
         if (index < count)
         {
-            for(let i = 0; i < 32;i++)
+            for(let i = 0; i < this.sequencerLength*this.numOfSamples;i++)
             {
                 let currentDiv = document.getElementById(i);
                 currentDiv.style.backgroundColor = "darkGray";
@@ -95,12 +96,12 @@ class Sequencer
         }
         else 
         {
-           this.loop(0,this.beatTime,8);
+           this.loop(0,this.beatTime,this.sequencerLength);
         }
     }
     startSequencer = () => {
         this.playing = true;
-        this.loop(0, this.beatTime, 8);
+        this.loop(0, this.beatTime, this.sequencerLength);
       
     }
     

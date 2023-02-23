@@ -19,3 +19,5 @@ const playButton = document.querySelector("#play-button");
 playButton.addEventListener("click",sequencer.startSequencer,false);
 const stopButton = document.querySelector("#stop-button");
 stopButton.addEventListener("click",sequencer.stopSequencer,false);
+const bpmText = document.querySelector("#bpm-div");
+bpmText.textContent = "BPM 120";
