@@ -14,10 +14,24 @@ audioSamples.push(chihat);
 var ohihat = {name: "ohihat", audio: new Audio()};
 ohihat.audio.src = "sounds/ohihat.wav";
 audioSamples.push(ohihat);
-const sequencer = new Sequencer(8);
+const sequencer = new Sequencer(16);
+
 const playButton = document.querySelector("#play-button");
 playButton.addEventListener("click",sequencer.startSequencer,false);
 const stopButton = document.querySelector("#stop-button");
 stopButton.addEventListener("click",sequencer.stopSequencer,false);
-const bpmText = document.querySelector("#bpm-div");
+var bpmText = document.querySelector("#bpm-div"); //BPM text at top left of page
 bpmText.textContent = "BPM 120";
+const bpmSlider = document.querySelector("#bpm-slider"); 
+const bpmValue = document.querySelector("#bpm-value"); //BPM text for settings on left of page
+bpmValue.textContent = 120;
+bpmSlider.addEventListener("input", (event) => {
+    bpmValue.textContent = event.target.value
+    sequencer.bpm = event.target.value;
+    bpmText.textContent =  "BPM "+event.target.value;
+    sequencer.bpm = event.target.value;
+    sequencer.changeTempo(sequencer.bpm);
+  });
+
+const clearProjectButton = document.querySelector("#clear-button");
+clearProjectButton.addEventListener("click",sequencer.clearSequencer,false);

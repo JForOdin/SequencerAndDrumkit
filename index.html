@@ -14,7 +14,7 @@
 <body>
     <div id = "header-div">
         <div id="bpm-div">
-            BPM
+            <output id="bpm-value-two"></output>
         </div>
         <div class="title-div">
             Sequencer
@@ -28,13 +28,15 @@
     <div class="main-div">
         <div id = "sample-div">
             <label for="bpm">BPM</label>
-            <input type="range" id="bpm-slider" name="bpm" min="40" max="160">
+            <input type="range" id="bpm-slider" name="bpm" min="40" max="180">
+            <output id="bpm-value"></output>
             <label for="volume">Volume</label>
             <input type="range" id="volume-slider" name="volume" min="0" max="10">
         </div>
         <div class = "sequencer-div-container">
             <div id = "kick-div">
             </div>
+                
             <div id = "snare-div">
             </div>
             <div id = "chihat-div">
@@ -64,7 +66,7 @@
         </button>
         
     </div>  
-    
+    <div class = "footer">Made By Jovian Brown 2023</div>
     <audio src = "/sounds/kick.wav"  id = "kick" class="sample" position = "0"></audio>
     <audio src = "/sounds/snare.wav" id = "snare" class="sample" position = "1"></audio>
     <audio src = "/sounds/chihat.wav" id = "chihat" class="sample" position = "2"></audio>

@@ -16,7 +16,7 @@ class Sequencer
         this.rowDivs.push(oHatDiv);
         this.sequencerLength = sequencerLength;
         this.bpm = 120;
-        this.beatTime = 500; //duration of each beat 500 ms
+        this.beatTime = 500/2; //duration of each beat 500 ms
         ///////// Our intial play state should be false
         this.playing = false;
         /// Total samples set to a constant of 4
@@ -35,7 +35,14 @@ class Sequencer
             }
         }
     }
-    
+    lerp = (a, b, t) => {
+
+        return a + (b-a) * t;
+    }
+    changeTempo = (tempo) => {
+       this.beatTime = (this.lerp(1500,0,tempo/180)+333)/2; //interpolate between 40 bpm and 180
+        //console.log(this.beatTime);
+    }
     addToSequence = (position) => 
     {
         if(this.sequencerUI[position.row][position.column].armed)
@@ -43,14 +50,36 @@ class Sequencer
             this.sequencerUI[position.row][position.column].armed = false;
             let divInMind = document.getElementById(`${this.sequencerUI[position.row][position.column].id}`);
             divInMind.style.backgroundColor = "darkGray";
+            divInMind.armed = "false";
         }
         else
         {
             this.sequencerUI[position.row][position.column].armed = true;
             let divInMind = document.getElementById(`${this.sequencerUI[position.row][position.column].id}`);
             divInMind.style.backgroundColor = "lightGreen";
+            divInMind.armed = "true";
+
         }
     }
+    clearSequencer = () =>
+    {
+        for(let i = 0; i < this.numOfSamples; i++) //for each of our rows
+        {
+            for(let j = 0; j < this.sequencerLength; j++) ///each column div
+            {
+                this.sequencerUI[i][j].armed = false;
+            }
+        }
+        for(let i = 0; i < this.sequencerLength*this.numOfSamples; i++)
+        {
+            let currentDiv = document.getElementById(i);
+            currentDiv.armed = "false";
+            currentDiv.style.backgroundColor = "darkgray";
+
+        }
+
+    }
+    
     createDiv(parentDiv,column,row,currentID) 
     { //returns a div to be used for sequencer
         let div;
@@ -60,6 +89,7 @@ class Sequencer
         div.style.height = "40px";
         div.className ="box";
         div.id = currentID;
+        div.armed = false;
         div.position = {row,column};
         div.addEventListener("click", this.addToSequence.bind(null,div.position),false);
         return div;
@@ -74,7 +104,10 @@ class Sequencer
             for(let i = 0; i < this.sequencerLength*this.numOfSamples;i++)
             {
                 let currentDiv = document.getElementById(i);
-                currentDiv.style.backgroundColor = "darkGray";
+                if(currentDiv.armed=="true")
+                    currentDiv.style.backgroundColor = "lightGreen";
+                else
+                    currentDiv.style.backgroundColor = "darkGray";
             }
             for(let i = 0; i < this.numOfSamples; i++)
             {
@@ -87,12 +120,11 @@ class Sequencer
 
                 }
             }
-            
             index ++;
             setTimeout(()=>
             {
-                this.loop(index, limit, count);
-            }, limit)
+                this.loop(index, this.beatTime, count);
+            }, this.beatTime)
         }
         else 
         {
@@ -100,31 +132,32 @@ class Sequencer
         }
     }
     startSequencer = () => {
+        if(this.playing)
+            return;
         this.playing = true;
         this.loop(0, this.beatTime, this.sequencerLength);
       
     }
-    
     stopSequencer = () => {
         if(this.playing)
         {
             this.playing = false;
             console.log("Stop sequencer");
         }
-        for(let i = 0; i < 32;i++)
+        for(let i = 0; i < this.sequencerLength*this.numOfSamples;i++)
         {
             let currentDiv = document.getElementById(i);
-            currentDiv.style.backgroundColor = "darkGray";
+            if(currentDiv.armed == "true")
+            {
+                currentDiv.style.backgroundColor = "lightGreen";
+            }
+            else
+            {
+                currentDiv.style.backgroundColor = "darkGray";
+            }
         }
     }
-    playMultipleSamples(samples)
-    {
-        for(let i = 0; i < samples.length; i++)
-        {
-            audioSamples[samples[i]].currentTime = 0;
-            audioSamples[samples[i]].audio.play();
-        }
-    }
+
     playSample(sample)
     {
         console.log("playing sample from position "+sample); 
