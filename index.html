@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Sequencer and Drum Machine</title>
     <link rel="stylesheet" href="style.css">
-    <script src="test.js" defer></script>
     <script src = "sequencer.js" defer></script>
 
     <script src="main.js" defer></script>
@@ -30,8 +29,15 @@
             <label for="bpm">BPM</label>
             <input type="range" id="bpm-slider" name="bpm" min="40" max="180">
             <output id="bpm-value"></output>
-            <label for="volume">Volume</label>
-            <input type="range" id="volume-slider" name="volume" min="0" max="10">
+            <label for="resolution">Beat Resolution</label>
+            <select name="resolution" id="resolution">
+                <option value="single-time">single-time</option>
+                <option value="double-time">double-time</option>
+                <option value="quarter-time">quarter-time</option>
+
+            </select>   
+            <!-- <label for="volume">Volume</label> -->
+            <!-- <input type="range" id="volume-slider" name="volume" min="0" max="10"> -->
         </div>
         <div class = "sequencer-div-container">
             <div id = "kick-div">
@@ -44,7 +50,7 @@
             <div id = "ohihat-div">
             </div>
         </div>
-        <div class = "sample-controls">
+      <!--  <div class = "sample-controls">
             <div id="velocity">
                 Velocity
                 <div id = "velocity-div">
@@ -52,7 +58,7 @@
                     <button id ="medium">medium</button>
                     <button id ="strong">strong</button>
                 </div>
-            </div>
+            </div> -->
          
         </div>
         

@@ -1,6 +1,5 @@
 /// First set a few globals //// 
 
-//var playing = false; //determines whether sequencer should be playing or not
 const audioSamples = []; //I will create a sample object that will wrap all of the audio files
 var kick = {name: "kick", audio: new Audio()};
 kick.audio.src = "sounds/kick.wav";
@@ -35,3 +34,8 @@ bpmSlider.addEventListener("input", (event) => {
 
 const clearProjectButton = document.querySelector("#clear-button");
 clearProjectButton.addEventListener("click",sequencer.clearSequencer,false);
+
+const resolutionButton = document.querySelector("#resolution");
+resolutionButton.addEventListener("input", (event) => {
+    sequencer.changeResolution(event.target.value);
+});

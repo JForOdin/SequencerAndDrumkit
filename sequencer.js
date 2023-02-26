@@ -16,7 +16,8 @@ class Sequencer
         this.rowDivs.push(oHatDiv);
         this.sequencerLength = sequencerLength;
         this.bpm = 120;
-        this.beatTime = 500/2; //duration of each beat 500 ms
+        this.resolution = 1;
+        this.beatTime = 500/this.resolution; //duration of each beat 500 ms
         ///////// Our intial play state should be false
         this.playing = false;
         /// Total samples set to a constant of 4
@@ -40,8 +41,24 @@ class Sequencer
         return a + (b-a) * t;
     }
     changeTempo = (tempo) => {
-       this.beatTime = (this.lerp(1500,0,tempo/180)+333)/2; //interpolate between 40 bpm and 180
+       this.beatTime = (this.lerp(1500,0,tempo/180)+333)/this.resolution; //interpolate between 40 bpm and 180
         //console.log(this.beatTime);
+    }
+    changeResolution = (resolutionValue ) =>{
+        //this.resolution = resolutionValue;
+        if(resolutionValue=="single-time")
+        {
+            this.resolution = 1;
+        }
+        else if(resolutionValue=="double-time")
+        {
+            this.resolution = 2;
+        }
+        else
+        {
+            this.resolution = 4;
+        }
+        console.log(this.resolution);
     }
     addToSequence = (position) => 
     {
@@ -85,8 +102,12 @@ class Sequencer
         let div;
         div = document.createElement("div");
         div.style.backgroundColor = "darkgray";
-        div.style.width = "40px";
-        div.style.height = "40px";
+        div.style.width = "30px";
+        div.style.height = "30px";
+       // div.style.maxWidth = "30px";
+       // div.style.maxHeight = "30px";
+        div.flexWrap = "wrap";
+       // div.textContent = "1";
         div.className ="box";
         div.id = currentID;
         div.armed = false;
@@ -94,12 +115,12 @@ class Sequencer
         div.addEventListener("click", this.addToSequence.bind(null,div.position),false);
         return div;
     }
-    loop = (index, limit, count) => 
+    loop = (index, delayBetweenBars, sequencerLength) => 
     {
         console.log("index"+index);
         if(!this.playing)
             return;
-        if (index < count)
+        if (index < sequencerLength)
         {
             for(let i = 0; i < this.sequencerLength*this.numOfSamples;i++)
             {
@@ -117,25 +138,24 @@ class Sequencer
                 {
                     console.log(this.sequencerUI[i][index].sample);
                     this.playSample(this.sequencerUI[i][index].sample);
-
                 }
             }
             index ++;
             setTimeout(()=>
             {
-                this.loop(index, this.beatTime, count);
-            }, this.beatTime)
+                this.loop(index, this.beatTime/this.resolution, this.sequencerLength);
+            }, this.beatTime/this.resolution)
         }
         else 
         {
-           this.loop(0,this.beatTime,this.sequencerLength);
+           this.loop(0,this.beatTime/this.resolution,this.sequencerLength);
         }
     }
     startSequencer = () => {
         if(this.playing)
             return;
         this.playing = true;
-        this.loop(0, this.beatTime, this.sequencerLength);
+        this.loop(0, this.beatTime/this.resolution, this.sequencerLength);
       
     }
     stopSequencer = () => {
@@ -155,6 +175,10 @@ class Sequencer
             {
                 currentDiv.style.backgroundColor = "darkGray";
             }
+        }
+        for(let sample of this.audioSamples) //rewind all samples back to 0
+        {
+            sample.audio.currentTime = 0;
         }
     }
 

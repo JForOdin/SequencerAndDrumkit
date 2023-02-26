@@ -11,6 +11,7 @@
     padding: 5px;
     display: flex;
     background-color: floralwhite;
+    border-bottom: 2px solid darkgray;
 
 }
 #bpm-div {
@@ -47,9 +48,8 @@ button {
     margin: 8px;
     color:white;
     text-align: center;
-    border: 2px solid white;
+    border: 2px solid darkcyan;
     border-radius: 10px;
-    width: fit-content;
 }
 #sample-div > * {
     color: white;
@@ -58,48 +58,52 @@ button {
 .sequencer-div-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     border: 2px solid white;
     padding: 4px;
     border-radius: 10px;
     gap: 4px;
     font-size:small;
-
-
+    flex-wrap: wrap;
+    height: auto;
 }
 #kick-div {
    display: flex;
    flex: 1;
-   justify-content:center;
    gap: 4px;
    align-items: center;
-
+    flex-wrap: wrap;
 }
 
 #snare-div {
     display: flex;
     flex: 1;
-    justify-content:space-between;
+    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
+    flex-wrap: wrap;
 
  }
+
  #chihat-div {
     display: flex;
     flex: 1;
-    justify-content:space-between;
+    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
+    flex-wrap: wrap;
 
  }
  #ohihat-div {
     display: flex;
     flex: 1;
-    justify-content:space-between;
+    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
+    flex-wrap: wrap;
 
  }
+
  .sample-controls {
     display:flex;
     flex-direction: row;
@@ -138,7 +142,27 @@ button {
     color :  white;
     margin-top: 50px;
     background-color:lightslategray;
-    /* text-align: center; */
     display: flex;
     justify-content: center;
+    font-size: small;
 }
+#resolution {
+    color: white;
+    background-color: darkcyan;
+
+    text-align: center;
+}
+@media
+(prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior:smooth;
+  }
+}
+/* 
+@media only screen and (max-width: 600px)
+{
+    .sequencer-div-container {
+        
+  
+    }
+} */
