@@ -1,44 +1,68 @@
-
+body {
+    max-width: fit-content;
+    margin: 0px auto;
+}
 #header-div {
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
-    color:darkcyan;
-    border-top: 2px solid darkgray;
-    border-bottom: 2px solid darkgray;
+    background-color: lightgray;
+    color: white;
+    border-top: 2px solid rgb(238, 236, 236);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 5px;
     display: flex;
-    background-color: floralwhite;
-    border-bottom: 2px solid darkgray;
+    border-bottom: 2px solid darkcyan;
 
 }
+
 #bpm-div {
     flex:1 1 0;
+    margin: 0px auto;
+    justify-content: center;
 }
 .title-div {
     flex: 1 1 0;
     align-content: flex-end;
     text-align:center;
-    /* justify-content: center; */
 
 }
-.control-div{
+/* playbutton stop button */
+.control-div{  
     flex: 1 1 0; 
     
 }
+
 button {
-    background-color:darkcyan;
-    color: white;
-    margin: 2px;
+display:inline-block;
+padding:0.5em 3em;
+border:0.16em solid #008b8b;
+margin:0 0.3em 0.3em 0;
+box-sizing: border-box;
+text-decoration:none;
+text-transform:uppercase;
+font-weight:400;
+color: darkcyan;
+text-align:center;
+transition: all 0.5s;
+border-radius: 4px;
 }
+button:hover{
+    /* color:lightskyblue; */
+    border-color:#00BEBE;
+}
+/* bpm volume etc */
 .main-div {
     display: flex;
     gap: 10px;
-    /* margin: 20px; */
     justify-content: space-around;
     background-color: lightgray;
+    padding-bottom: 10px;
+    border-top: darkgray solid 5px;
+    
+    border-bottom: darkgray solid 10px;
+
 }
 
 #sample-div {
@@ -48,14 +72,31 @@ button {
     margin: 8px;
     color:white;
     text-align: center;
-    border: 2px solid darkcyan;
+    border: 4px solid #008b8b;
     border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: rgb(94, 94, 94) 7px 10px 5px;
+
 }
+
 #sample-div > * {
     color: white;
     accent-color: darkcyan;
+    margin-bottom: 10px;
 }
-.sequencer-div-container {
+
+.sample-desc {
+    width: 60px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #00BEBE;
+}
+.sequencer-div {
+    display:flex;
+    flex-direction: column;
+    padding: 5px;
+
+}
+.drum-div-container {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -67,40 +108,38 @@ button {
     flex-wrap: wrap;
     height: auto;
 }
+
 #kick-div {
    display: flex;
    flex: 1;
    gap: 4px;
    align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
 
 #snare-div {
     display: flex;
     flex: 1;
-    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 
  }
 
  #chihat-div {
     display: flex;
     flex: 1;
-    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 
  }
  #ohihat-div {
     display: flex;
     flex: 1;
-    /* justify-content:space-between; */
     gap: 4px;
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 
  }
 
@@ -114,6 +153,7 @@ button {
     color:darkcyan;
     border: 2px solid white;
     border-radius: 10px;
+    
  }
  #velocity-div{
      display:flex;
@@ -134,6 +174,7 @@ button {
     border-bottom: 2px solid darkgray;
     background-color: floralwhite;
     border-radius: 10px;
+
 }
 
 .footer {
@@ -141,7 +182,7 @@ button {
     padding: 20px;
     color :  white;
     margin-top: 50px;
-    background-color:lightslategray;
+    background-color:darkcyan;
     display: flex;
     justify-content: center;
     font-size: small;
@@ -149,7 +190,11 @@ button {
 #resolution {
     color: white;
     background-color: darkcyan;
-
+    text-align: center;
+}
+#drumkit {
+    color: white;
+    background-color: darkcyan;
     text-align: center;
 }
 @media
@@ -158,11 +203,27 @@ button {
     scroll-behavior:smooth;
   }
 }
-/* 
+ 
 @media only screen and (max-width: 600px)
 {
-    .sequencer-div-container {
-        
-  
+    #kick-div > * {
+        max-width: 20px;
+        max-height: auto;
     }
-} */
+    #snare-div > * {
+        max-width: 20px;
+        max-height: auto;
+    }
+    #chihat-div > * {
+        max-width: 20px;
+        max-height: auto;
+    }
+    #ohihat-div > * {
+        max-width: 20px;
+        max-height: auto;
+    }
+    .main-div-container > * {
+        flex-wrap:wrap;
+    }
+
+} 

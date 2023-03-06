@@ -3,20 +3,24 @@ class Sequencer
 {
     constructor(sequencerLength)
     {
+        this.volume = 1.0;
         /// Define 4 divs for each of our sample rows //
         const kickDiv = document.querySelector("#kick-div");
         const snareDiv = document.querySelector("#snare-div");
-        const oHatDiv = document.querySelector("#ohihat-div");
         const cHatDiv = document.querySelector("#chihat-div");
+        const oHatDiv = document.querySelector("#ohihat-div");
         ////// Put the row divs into an array for later
         this.rowDivs = [];
         this.rowDivs.push(kickDiv);
         this.rowDivs.push(snareDiv);
         this.rowDivs.push(cHatDiv);
         this.rowDivs.push(oHatDiv);
+   //     this.rowDivs.push(smallTomDiv);
+   //     this.rowDivs.push(largeTomDiv);
+
         this.sequencerLength = sequencerLength;
         this.bpm = 120;
-        this.resolution = 1;
+        this.resolution = 2;
         this.beatTime = 500/this.resolution; //duration of each beat 500 ms
         ///////// Our intial play state should be false
         this.playing = false;
@@ -42,7 +46,6 @@ class Sequencer
     }
     changeTempo = (tempo) => {
        this.beatTime = (this.lerp(1500,0,tempo/180)+333)/this.resolution; //interpolate between 40 bpm and 180
-        //console.log(this.beatTime);
     }
     changeResolution = (resolutionValue ) =>{
         //this.resolution = resolutionValue;
@@ -58,7 +61,6 @@ class Sequencer
         {
             this.resolution = 4;
         }
-        console.log(this.resolution);
     }
     addToSequence = (position) => 
     {
@@ -73,7 +75,7 @@ class Sequencer
         {
             this.sequencerUI[position.row][position.column].armed = true;
             let divInMind = document.getElementById(`${this.sequencerUI[position.row][position.column].id}`);
-            divInMind.style.backgroundColor = "lightGreen";
+            divInMind.style.backgroundColor = "#00BEBE";
             divInMind.armed = "true";
 
         }
@@ -102,12 +104,13 @@ class Sequencer
         let div;
         div = document.createElement("div");
         div.style.backgroundColor = "darkgray";
+        
+        div.style.borderRight = "#838383 solid 3px";
+        div.style.borderBottom = "#838383 solid 3px"
         div.style.width = "30px";
         div.style.height = "30px";
-       // div.style.maxWidth = "30px";
-       // div.style.maxHeight = "30px";
-        div.flexWrap = "wrap";
-       // div.textContent = "1";
+        div.style.borderRadius = "4px";
+       // div.flexWrap = "wrap";
         div.className ="box";
         div.id = currentID;
         div.armed = false;
@@ -117,7 +120,7 @@ class Sequencer
     }
     loop = (index, delayBetweenBars, sequencerLength) => 
     {
-        console.log("index"+index);
+     //   console.log("index"+index);
         if(!this.playing)
             return;
         if (index < sequencerLength)
@@ -126,21 +129,20 @@ class Sequencer
             {
                 let currentDiv = document.getElementById(i);
                 if(currentDiv.armed=="true")
-                    currentDiv.style.backgroundColor = "lightGreen";
+                    currentDiv.style.backgroundColor = "#00BEBE";
                 else
                     currentDiv.style.backgroundColor = "darkGray";
             }
             for(let i = 0; i < this.numOfSamples; i++)
             {
                 let currentDiv = document.getElementById(`${this.sequencerUI[i][index].id}`);
-                currentDiv.style.backgroundColor = "skyBlue";
+                currentDiv.style.backgroundColor = "#008B8B";
                 if(this.sequencerUI[i][index].armed)
                 {
-                    console.log(this.sequencerUI[i][index].sample);
                     this.playSample(this.sequencerUI[i][index].sample);
                 }
             }
-            index ++;
+            index++;
             setTimeout(()=>
             {
                 this.loop(index, this.beatTime/this.resolution, this.sequencerLength);
@@ -169,23 +171,22 @@ class Sequencer
             let currentDiv = document.getElementById(i);
             if(currentDiv.armed == "true")
             {
-                currentDiv.style.backgroundColor = "lightGreen";
+                currentDiv.style.backgroundColor = "#00BEBE";
             }
             else
             {
                 currentDiv.style.backgroundColor = "darkGray";
             }
         }
-        for(let sample of this.audioSamples) //rewind all samples back to 0
-        {
-            sample.audio.currentTime = 0;
-        }
     }
-
+    setVolume(volume)
+    {
+        this.volume = volume;
+    }
     playSample(sample)
     {
-        console.log("playing sample from position "+sample); 
         audioSamples[sample].audio.currentTime = 0;
+        audioSamples[sample].audio.volume = this.volume;
         audioSamples[sample].audio.play();
     }
 

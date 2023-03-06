@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Sequencer and Drum Machine</title>
+    <title>Sequencer and Drum Machine</title>
     <link rel="stylesheet" href="style.css">
     <script src = "sequencer.js" defer></script>
 
@@ -16,11 +16,12 @@
             <output id="bpm-value-two"></output>
         </div>
         <div class="title-div">
-            Sequencer
+            <!-- <h2>Drum Smasher</h2> -->
+            <img src="images/drumsmasherlogo.png" width = "140" height="90">
         </div>
         <div class="control-div">
-            <button id="play-button">›</button>
-            <button id="stop-button">s</button>
+            <button id="play-button"><img src = "images/playbutton.png" width= "20" ></button>
+            <button id="stop-button"><img src = "images/stopbutton.png" width = "20" ></button>
 
         </div>
     </div>
@@ -29,28 +30,62 @@
             <label for="bpm">BPM</label>
             <input type="range" id="bpm-slider" name="bpm" min="40" max="180">
             <output id="bpm-value"></output>
+            <label for="volume">Volume</label>
+            <input type="range" id="volume-slider" name="volume" min="0" max="100" value = "100">
+            <output id="volume-value"></output>
             <label for="resolution">Beat Resolution</label>
-            <select name="resolution" id="resolution">
-                <option value="single-time">single-time</option>
-                <option value="double-time">double-time</option>
-                <option value="quarter-time">quarter-time</option>
-
+            <select name="resolution" id="resolution" >
+                <option value="single-time">4 beats/bar</option>
+                <option selected = "double-time">8 beats/bar</option>
+                <option value="quarter-time">16 beats/bar</option>
             </select>   
+            <label for="drumkit">Drum Kit</label>
+            <select name="disco" id="drumkit" >
+                <option value="hip-hop">hip hop</option>
+                <option selected = "disco">disco</option>
+                <option value="soul">soul</option>
+
+            </select> 
             <!-- <label for="volume">Volume</label> -->
             <!-- <input type="range" id="volume-slider" name="volume" min="0" max="10"> -->
         </div>
-        <div class = "sequencer-div-container">
-            <div id = "kick-div">
-            </div>
+        <div class = "sequencer-div">
+
+            <div class = "drum-div-container">
                 
-            <div id = "snare-div">
+                <div id = "kick-div">
+                    <div class                                                                        = "sample-desc">kick</div>
+                </div>
+                    
+                <div id = "snare-div">
+                    <div class = "sample-desc">snare</div>
+                </div>
+                <div id = "chihat-div">
+                    <div class = "sample-desc">closed hh</div>
+                </div>
+                <div id = "ohihat-div">
+                    <div class = "sample-desc">open hh</div>
+                </div>
+                <!-- <div id = "small-tom-div">
+                    <div class = "sample-desc">small tom</div>
+                </div>
+                <div id = "large-tom-div">
+                    <div class = "sample-desc">large tom</div>
+                </div> -->
             </div>
-            <div id = "chihat-div">
-            </div>
-            <div id = "ohihat-div">
+            <div class = "drum-div-container">
+                <div class = "instruments-div">
+                </div>
+                    
+                <div class = "instruments-div">
+                </div>
+                <div class = "instruments-div">
+                </div>
+                <div class = "instruments-div">
+                </div>
             </div>
         </div>
-      <!--  <div class = "sample-controls">
+       <!-- <div class = "sample-controls">
             <div id="velocity">
                 Velocity
                 <div id = "velocity-div">
@@ -58,9 +93,9 @@
                     <button id ="medium">medium</button>
                     <button id ="strong">strong</button>
                 </div>
-            </div> -->
+            </div>
          
-        </div>
+        </div> -->
         
     </div>
     <div class = "project-div">
@@ -72,7 +107,7 @@
         </button>
         
     </div>  
-    <div class = "footer">Made By Jovian Brown 2023</div>
+    <div class = "footer">Made By Jovian 2023</div>
     <audio src = "/sounds/kick.wav"  id = "kick" class="sample" position = "0"></audio>
     <audio src = "/sounds/snare.wav" id = "snare" class="sample" position = "1"></audio>
     <audio src = "/sounds/chihat.wav" id = "chihat" class="sample" position = "2"></audio>
